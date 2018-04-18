@@ -1,7 +1,22 @@
-{extend name='layout/layout'/}
+{extend name='template/layout'/}
+{block name="banner"}
+<div class="banner">
+    <!--轮播 -->
+    <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
+        <ul class="am-slides">
+            <li class="banner1"><a href="introduction.html"><img style="width: 1020px; height: 455px ;" src="__STATIC__/myshop/images/ad22.jpg" /></a></li>
+            <li class="banner2"><a><img style="width: 1020px; height: 455px ;" src="__STATIC__/myshop/images/ad11.jpg" /></a></li>
+            <li class="banner3"><a><img src="__STATIC__/myshop/images/ad3.jpg" /></a></li>
+            <li class="banner4"><a><img src="__STATIC__/myshop/images/ad4.jpg" /></a></li>
+
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+{/block}
+{block name="shopNav"}
 <div class="shopNav">
     <div class="slideall">
-
         <div class="long-title"><span class="all-goods">全部分类</span></div>
         <div class="nav-cont">
             <ul>
@@ -49,14 +64,14 @@
                                                     <h3 class="dl-sort" style="margin-left: 10px;"><span>实力商家</span></h3>
                                                     <div class="dl-sort">
                                                         <span title="手机" style="color: #f44cde; margin-left: 10px;">手机：</span>
-                                                        {volist name='bd' id="brand"}
-                                                        <a rel="nofollow" title="" target="_blank" href="#" rel="nofollow"><span  class ="red" >{$brand.brand_name}</span></a>
+                                                        {volist name='bd' id="brandd"}
+                                                        <a rel="nofollow" title="" target="_blank" href="#" rel="nofollow"><span  class ="red" >{$brandd.brand_name}</span></a>
                                                         {/volist}
                                                     </div>
                                                     <div class="dl-sort" style="display: inline-block">
                                                         <span  title="电脑" style="color: #f44cde; margin-left: 10px;">电脑：</span>
-                                                        {volist name='bdd' id="brandd"}
-                                                        <a rel="nofollow" title="" target="_blank" href="#" rel="nofollow"><span  class ="red" >{$brandd.brand_name}</span></a>
+                                                        {volist name='bdd' id="brands"}
+                                                        <a rel="nofollow" title="" target="_blank" href="#" rel="nofollow"><span  class ="red" >{$brands.brand_name}</span></a>
                                                         {/volist}
                                                     </div>
                                                 </div>
@@ -183,6 +198,7 @@
         }
     </script>
 </div>
+{/block}
 {block name="shopMainbg"}
 <div class="shopMainbg">
 
