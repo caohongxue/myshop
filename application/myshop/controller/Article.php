@@ -23,7 +23,14 @@ class Article extends Controller
             ->where(['is_show'=>1])
             ->limit(6)
             ->select();
-        return $this->fetch('index',['iphone'=>$iphone,'brand'=>$brand]);
+        $content=Db::table('article')->where('is_show','1')->select();
+        foreach ($content as & $v) {
+            $v['tab_name'] = Db::table($v['table_name'])->where('id',1)->select();
+            $v['caputer']=Db::table($v['table_name'])->where('id',2)->select();
+        }
+        $brands=Db::table('brand')->where('b_id',2)->select();
+        $brandd=Db::table('brand')->where('b_id',1)->select();
+        return $this->fetch('index',['iphone'=>$iphone,'brand'=>$brand,'content' => $content,'bd'=>$brands,'bdd'=>$brandd]);
     }
 
     /**
