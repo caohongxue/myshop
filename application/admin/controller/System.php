@@ -12,7 +12,7 @@ use think\Session;
  *网络管理控制器
  * @package app\admin\controller
  */
-class System extends Controller
+class System extends Base
 {
     /**
      * 品牌添加,修改数据
@@ -71,9 +71,12 @@ class System extends Controller
      */
     public function index()
     {
-        $limit = 3;
+        $limit = 8;
         $model = new SystemModel();
         $result = $model->paginate($limit);//分页
+        foreach ($result as $value){
+            $value['is_show']=$value['is_show']==1?'展示':'不展示';
+        }
         return $this->fetch('index',['result'=>$result]);
 
     }
