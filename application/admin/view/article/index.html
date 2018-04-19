@@ -4,15 +4,9 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <a href="{:url('save')}" data-toggle="tooltip" title="新增" class="btn btn-primary">
-                    <i class="fa fa-plus"></i>
-                </a>
                 <a href="" data-toggle="tooltip" title="刷新" class="btn btn-default">
                     <i class="fa fa-refresh"></i>
                 </a>
-                <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-category').submit() : false;">
-                    <i class="fa fa-trash-o"></i>
-                </button>
             </div>
             <h1>商品分类</h1>
             <ul class="breadcrumb">
@@ -39,28 +33,22 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <td style="width: 1px;" class="text-center">
-                                    <input type="checkbox" onclick="$('input[name*=\'id\']').prop('checked', this.checked);" />
-                                </td>
                                 <td class="text-left">
-                                    {if condition="isset($desc)"}<a href="{:url('index')}" class="desc">分类名称</a>{else/}<a href="{:url('desc')}" class="asc">分类名称</a>{/if}
+                                    {if condition="isset($desc)"}<a href="{:url('index')}" class="desc">商品属性</a>{else/}<a href="{:url('desc')}" class="asc">商品属性</a>{/if}
                                 </td>
                                 <td class="text-right">
-                                    <a href="">分类状态</a>
+                                    <a href="">是否导航</a>
                                 </td>
-                                <td class="text-right">编辑分类</td>
+                                <td class="text-right">商品属性详情</td>
                             </tr>
                             </thead>
                             <tbody>
                             {volist name='list' id='row'}
-                                  <tr>
-                                <td class="text-center">
-                                    <input type="checkbox" name="id[]" value="{$row.id}" />
-                                </td>
-                                <td class="text-left">{$row.cat_name}</td>
-                                <td class="text-right">{$row.status}</td>
+                            <tr>
+                                <td class="text-left">{$row.name}</td>
+                                <td class="text-left">{$row.is_show_text}</td>
                                 <td class="text-right">
-                                    <a href="{:url('save',['id'=>$row['id']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
+                                    <a href="{:url('table',['id'=>$row['id']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                 </td>
