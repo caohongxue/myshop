@@ -17,7 +17,7 @@ class Base extends Controller{
    ];
     public function first(){
         $userInfo=Session::get('userInfo');
-        dump(session_id());
+//        dump(session_id());
 //        dump($userInfo);exit;
         if(!$userInfo){
             $this->redirect('Login/login');
