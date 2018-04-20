@@ -30,7 +30,9 @@ class Article extends Controller
         }
         $brands=Db::table('brand')->where('b_id',2)->select();
         $brandd=Db::table('brand')->where('b_id',1)->select();
-        return $this->fetch('index',['iphone'=>$iphone,'brand'=>$brand,'content' => $content,'bd'=>$brands,'bdd'=>$brandd]);
+        $brandp=Db::table('brand')->where('b_id',3)->select();
+        $rexo=Db::table('goods')->where('click_name','>','10')->limit(3)->select();
+        return $this->fetch('index',['iphone'=>$iphone,'brand'=>$brand,'content' => $content,'bd'=>$brands,'bdd'=>$brandd,'bdp'=>$brandp,'rexo'=>$rexo]);
     }
 
     /**
@@ -40,20 +42,25 @@ class Article extends Controller
      */
     public function each($id){
         $data=Db::name('goods')->find($id);
-//        var_dump($data);die;
         $brand=Db::name('brand')->find($data['brand_id']);
         $run=Db::name('processor')->find($data['runme_id']);
         $pro=Db::name('processor')->find($data['pro_id']);
         $mem=Db::name('running_memory')->find($data['memory_id']);
+
         return $this->fetch('each',['data'=>$data,'brand'=>$brand,'pro'=>$pro,'run'=>$run,'mem'=>$mem]);
     }
 
-
-
-
-    public function create()
+    public function search()
     {
-        //
+         $content=$_POST['index_none_header_sysc'];
+         $sql="select `brand_name` from `brand` where `brand_name` like '%".$content."%'";
+         $brand=Db::table('brand')->query($sql);
+         $number="select count(*) from `goods` where `goods_name` like '%".$content."%'" ;
+         $num=Db::table('goods')->query($number);
+         $cat="select goods_name from `goods` where `goods_name` like '%".$content."'" ;
+         $cate=Db::table('goods')->query($cat);
+         $redn=Db::table('goods')->where('goods_name',['like','$content%'],['like','%$content'])->where('click_name',['>',10],['<>',20])->find();
+         return $this->fetch('search',['content'=>$content,'brand'=>$brand,'num'=>$num,'cate'=>$cate,'redn'=>$redn]);
     }
 
     /**
