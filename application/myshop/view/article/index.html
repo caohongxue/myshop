@@ -125,8 +125,8 @@
         <div class="am-g am-g-fixed floodFour">
             <div class="am-u-sm-5 am-u-md-4 text-one list ">
                 <div class="word">
-                    {volist name='brand' id='val'}
-                    <a class="outer" href="#"><span class="inner"><b class="text">{$val.brand_name}</b></span></a>
+                    {volist name='brand_name' id='val'}
+                    <a class="outer" href="{:url('Article/saler',['id'=>$val['id']])}"><span class="inner"><b class="text">{$val.brand_name}</b></span></a>
                     {/volist}
                 </div>
                 <a href="# ">
