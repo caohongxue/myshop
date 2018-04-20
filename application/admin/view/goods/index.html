@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <a href="{:url('Back/Goods/add')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i class="fa fa-plus"></i>
+                <a href="{:url('save')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i class="fa fa-plus"></i>
                 </a>
                 <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-product').submit() : false;">
                     <i class="fa fa-trash-o"></i>
@@ -73,13 +73,13 @@
                                     <a href="" class="asc">商品名称</a>
                                 </td>
                                 <td class="text-left">
-                                    <a href="">UPC</a>
+                                    <a href="">商品型号</a>
                                 </td>
                                 <td class="text-right">
                                     <a href="" class="desc">价格</a>
                                 </td>
                                 <td class="text-right">
-                                    <a href="">数量</a>
+                                    <a href="">数量SKU</a>
                                 </td>
                                 <td class="text-left">
                                     <a href="">状态</a>
@@ -88,80 +88,39 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="text-center">
-                                    <input type="checkbox" name="selected[]" value="71" />
-                                </td>
-                                <td class="text-center">
-                                    <img src="../image/catalog/gd/product/yanjing4.jpg" alt="2016时尚墨镜 女士偏光太阳镜潮人欧美复古圆框眼镜驾驶镜" class="img-thumbnail" style="max-width: 40px"/>
-                                </td>
-                                <td class="text-left">2016时尚墨镜 女士偏光太阳镜潮人欧美复古圆框眼镜驾驶镜</td>
-                                <td class="text-left">1252323</td>
-                                <td class="text-right">
-                                    <span style="text-decoration: line-through;">8867.0000</span>
-                                    <br/>
-                                    <div class="text-danger">7770.0000</div>
-                                </td>
-                                <td class="text-right">
-                                    <span class="label label-success">6666</span>
-                                </td>
-                                <td class="text-left">启用</td>
-                                <td class="text-right">
-                                    <a href="{:url('Back/Goods/edit')}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a href="{:url('Back/Goods/option')}" data-toggle="tooltip" title="管理选项" class="btn btn-primary">
-                                        <i class="fa">O</i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <input type="checkbox" name="selected[]" value="73" />
-                                </td>
-                                <td class="text-center">
-                                    <img src="../image/catalog/gd/product/yanjing12.1.jpg" alt="普利邦 欧美圆框黑色炫酷太阳镜男款圆框防紫外线墨镜前卫驾驶镜" class="img-thumbnail" style="max-width: 40px"/>
-                                </td>
-                                <td class="text-left">普利邦 欧美圆框黑色炫酷太阳镜男款圆框防紫外线墨镜前卫驾驶镜</td>
-                                <td class="text-left">2321321</td>
-                                <td class="text-right">
-                                    <span style="text-decoration: line-through;">4999.0000</span>
-                                    <br/>
-                                    <div class="text-danger">3199.0000</div>
-                                </td>
-                                <td class="text-right">
-                                    <span class="label label-success">3333</span>
-                                </td>
-                                <td class="text-left">启用</td>
-                                <td class="text-right">
-                                    <a href="" data-toggle="tooltip" title="编辑" class="btn btn-primary">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                {volist name="list" id="row"}
+                                <tr>
+                                    <td class="text-center">
+                                        <input type="checkbox" name="selected[]" value="71" />
+                                    </td>
+                                    <td class="text-center">
+                                        <img src="../image/catalog/gd/product/yanjing4.jpg" alt="{$row.goods_name}" class="img-thumbnail" style="max-width: 40px"/>
+                                    </td>
+                                    <td class="text-left">{$row.goods_name}</td>
+                                    <td class="text-left">{$row.goods_model}</td>
+                                    <td class="text-right">
+                                        <span style="text-decoration: line-through;">{$row.shop_price}</span>
+                                        <br/>
+                                        <div class="text-danger">{$row.promote_price}</div>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="label label-success">{$row.stock}</span>
+                                    </td>
+                                    <td class="text-left">{$row.is_show}</td>
+                                    <td class="text-right">
+                                        <a href="{:url('save')}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="{:url('manage')}" data-toggle="tooltip" title="管理选项" class="btn btn-primary">
+                                            <i class="fa">O</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {/volist}
                             </tbody>
                         </table>
                     </div>
                 </form>
-                <div class="row">
-                    <div class="col-sm-6 text-left">
-                        <ul class="pagination">
-                            <li class="active">
-                                <span>1</span>
-                            </li>
-                            <li>
-                                <a href="">2</a>
-                            </li>
-                            <li>
-                                <a href="">&gt;</a>
-                            </li>
-                            <li>
-                                <a href="">&gt;|</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 text-right">显示开始 1 到 20 之 23 （总 2 页）</div>
-                </div>
             </div>
         </div>
     </div>

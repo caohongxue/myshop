@@ -22,6 +22,11 @@ class Base extends Controller{
         if(!$userInfo){
             $this->redirect('Login/login');
         }
+//        echo 'pathinfo: ' . $this->request->path() . '<br/>';
+//        if('pathinfo: ' . $this->request->path()!='admin/home/add'){
+//            $this->error('me');
+//        }
+
         $user=Db::table('admin_user')->find($userInfo['user_id']);
         Session::set('user',$user);
     }

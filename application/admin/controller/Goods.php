@@ -18,8 +18,14 @@ class Goods extends Controller
         //
         $model=new GoodsModel();
         $list=$model->where('is_delete',0)->select();
-        
-        return $this->fetch('index',[]);
+        foreach ($list as $value){
+            if($value['is_show']==1){
+                $value['is_show']='上架';
+            }else{
+                $value['is_show']='下架';
+            }
+        }
+        return $this->fetch('index',['list'=>$list]);
     }
 
     /**
