@@ -11,7 +11,7 @@
     </div>
     <ul id="menu">
         <li id="dashboard">
-            <a href="">
+            <a href="{:url('Home/index')}">
                 <i class="fa fa-dashboard fa-fw"></i>
                 <span>管理首页</span>
             </a>
@@ -23,10 +23,10 @@
             </a>
             <ul>
                 <li>
-                    <a href="">商品分类</a>
+                    <a href="{:url('Category/index')}">商品分类</a>
                 </li>
                 <li>
-                    <a href="">商品管理</a>
+                    <a href="{:url('Goods/index')}">商品管理</a>
                 </li>
                 <li class="hidden">
                     <a href="">分期付款</a>
@@ -35,21 +35,13 @@
                     <a href="">筛选过滤</a>
                 </li>
                 <li>
-                    <a class="parent">商品属性</a>
-                    <ul>
-                        <li>
-                            <a href="">商品属性</a>
-                        </li>
-                        <li>
-                            <a href="">属性组</a>
-                        </li>
-                    </ul>
+                    <a href="{:url('Article/index')}">商品属性</a>
                 </li>
                 <li>
                     <a href="">商品选项</a>
                 </li>
                 <li>
-                    <a href="{:url('')}">品牌管理</a>
+                    <a href="{:url('Brand/index')}">品牌管理</a>
                 </li>
                 <li>
                     <a href="">下载设置</a>
