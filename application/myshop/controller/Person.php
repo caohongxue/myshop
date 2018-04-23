@@ -60,7 +60,9 @@ class Person extends Controller
      */
     public function information()
     {
-        return $this->fetch();
+        $list = Db::name('user')->select();
+        $name = Session::get('user_name','think');
+        return $this->fetch('Person/information',['list'=>$list,'name'=>$name]);
     }
 
     /**
@@ -80,7 +82,9 @@ class Person extends Controller
      */
     public function address()
     {
-        return $this->fetch();
+        $id = Session::get('user_id','think');
+        $list = Db::name('user_address')->where(['user_id'=>$id])->select();
+        return $this->fetch('Person/address',['list'=>$list]);
     }
 
     /**
@@ -131,7 +135,8 @@ class Person extends Controller
      */
     public function comment()
     {
-        return $this->fetch();
+        $list = Db::name('comment')->select();
+        return $this->fetch('Person/comment',['list'=>$list]);
     }
 
     /**
@@ -155,6 +160,74 @@ class Person extends Controller
         return $this->fetch();
     }
 
+    /**
+     * 显示钱款去向页面
+     *
+     * @return \think\Response
+     */
+    public function record()
+    {
+        return $this->fetch();
+    }
 
+    /**
+     * 显示修改密码页面
+     *
+     * @return \think\Response
+     */
+    public function password()
+    {
+        return $this->fetch();
+    }
+
+    /**
+     * 显示启用支付密码功能页面
+     *
+     * @return \think\Response
+     */
+    public function setpay()
+    {
+        return $this->fetch();
+    }
+
+    /**
+     * 显示手机验证换绑页面
+     *
+     * @return \think\Response
+     */
+    public function bindphone()
+    {
+        return $this->fetch();
+    }
+
+    /**
+     * 显示邮箱验证换绑页面
+     *
+     * @return \think\Response
+     */
+    public function email()
+    {
+        return $this->fetch();
+    }
+
+    /**
+     * 显示实名认证页面
+     *
+     * @return \think\Response
+     */
+    public function idcard()
+    {
+        return $this->fetch();
+    }
+
+    /**
+     * 显示安全问题页面
+     *
+     * @return \think\Response
+     */
+    public function question()
+    {
+        return $this->fetch();
+    }
 }
 

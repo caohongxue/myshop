@@ -75,4 +75,15 @@ class Category extends Base
         }
         return $this->fetch('index',['list'=>$list,'desc'=>'1']);
     }
+    /**
+     * 删除指定资源
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function multidel()
+    {
+        CategoryModel::destroy(input('id/a',[]));//删除多条数据
+        $this->redirect('index');
+    }
 }
