@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <form action="http://php.kang.com/test/s/admin/index.php?route=catalog/product/delete&amp;token=nqIzSXp4UsRhLZ2GzwCvvFhqMsKSHkuh" method="post" enctype="multipart/form-data" id="form-product">
+                <form action="{:url('multidel')}" method="post" enctype="multipart/form-data" id="form-product">
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover">
                             <thead>
@@ -91,7 +91,7 @@
                                 {volist name="list" id="row"}
                                 <tr>
                                     <td class="text-center">
-                                        <input type="checkbox" name="selected[]" value="71" />
+                                        <input type="checkbox" name="selected[]" value="{$row.goods_id}" />
                                     </td>
                                     <td class="text-center">
                                         <img src="../image/catalog/gd/product/yanjing4.jpg" alt="{$row.goods_name}" class="img-thumbnail" style="max-width: 40px"/>

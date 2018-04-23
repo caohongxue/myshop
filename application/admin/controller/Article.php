@@ -5,7 +5,7 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\admin\model\Article as ArticleModel;
-class Article extends Controller
+class Article extends Base
 {
     /**
      * 显示资源列表
@@ -52,8 +52,9 @@ class Article extends Controller
      * @return \think\Response
      */
     public function table($id){
-        $table=ArticleModel::get($id)->value('table_name');
-        $c=ucfirst($table);
+        $model=new ArticleModel();
+        $table=$model->where('id',$id)->value('table_name');
+        $c= implode(array_map('ucfirst',explode('_',$table)));
         $this->redirect($c.'/index');
     }
 
