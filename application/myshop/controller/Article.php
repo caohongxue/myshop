@@ -25,14 +25,12 @@ class Article extends Controller
             ->select();
         $content=Db::table('article')->where('is_show','1')->select();
         foreach ($content as & $v) {
-            $v['tab_name'] = Db::table($v['table_name'])->where('tab_id',1)->select();
-            $v['caputer']=Db::table($v['table_name'])->where('tab_id',2)->select();
+            $v['tab_name'] = Db::table($v['table_name'])->where('id',1)->select();
+            $v['caputer']=Db::table($v['table_name'])->where('id',2)->select();
         }
         $brands=Db::table('brand')->where('b_id',2)->select();
         $brandd=Db::table('brand')->where('b_id',1)->select();
-        $brandp=Db::table('brand')->where('b_id',3)->select();
-        $rexo=Db::table('goods')->where('click_name','>','10')->limit(3)->select();
-        return $this->fetch('index',['iphone'=>$iphone,'brand'=>$brand,'content' => $content,'bd'=>$brands,'bdd'=>$brandd,'bdp'=>$brandp,'rexo'=>$rexo]);
+        return $this->fetch('index',['iphone'=>$iphone,'brand'=>$brand,'content' => $content,'bd'=>$brands,'bdd'=>$brandd]);
     }
 
     /**
@@ -42,27 +40,20 @@ class Article extends Controller
      */
     public function each($id){
         $data=Db::name('goods')->find($id);
+//        var_dump($data);die;
         $brand=Db::name('brand')->find($data['brand_id']);
         $run=Db::name('processor')->find($data['runme_id']);
         $pro=Db::name('processor')->find($data['pro_id']);
         $mem=Db::name('running_memory')->find($data['memory_id']);
-        $you=Db::table('goods')->where('click_name','>',10)->limit(5)->select();
-        return $this->fetch('each',['data'=>$data,'brand'=>$brand,'pro'=>$pro,'run'=>$run,'mem'=>$mem,'you'=>$you]);
+        return $this->fetch('each',['data'=>$data,'brand'=>$brand,'pro'=>$pro,'run'=>$run,'mem'=>$mem]);
     }
 
-    public function search()
+
+
+
+    public function create()
     {
-         $content=$_POST['index_none_header_sysc'];
-         $sql="select `brand_name` from `brand` where `brand_name` like '%".$content."%'";
-         $brand=Db::table('brand')->query($sql);
-         $number="select count(*) from `goods` where `goods_name` like '%".$content."%'" ;
-         $num=Db::table('goods')->query($number);
-         $cat="select goods_name from `goods` where `goods_name` like '%".$content."'" ;
-         $cate=Db::table('goods')->query($cat);
-         $redn=Db::table('goods')->where('goods_name',['like','$content%'],['like','%$content'])->where('click_name',['>',10],['<>',20],'or')->select();
-
-
-         return $this->fetch('search',['content'=>$content,'brand'=>$brand,'num'=>$num,'cate'=>$cate,'redn'=>$redn]);
+        //
     }
 
     /**
@@ -71,16 +62,9 @@ class Article extends Controller
      * @param  \think\Request  $request
      * @return \think\Response
      */
-    public function table($id,$table)
+    public function save(Request $request)
     {
         //
-        $tabl=Db::table($table)->where('tab_id',$id)->select();
-//        $goo=Db::table('correlation')->find('id',$tabl['id'])['goods_id'];
-//        $goos=Db::table('goods')->where('goods_id',$goo)->select();
-//        var_dump($goo);
-//        die;
-        return $this->fetch('sch',['table'=>$tabl]);
-
     }
 
     /**
