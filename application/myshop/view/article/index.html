@@ -1,4 +1,5 @@
 {extend name='template/layout'/}
+
 {block name="hmtop"}
 <div class="hmtop">
     <!--顶部导航条 -->
@@ -55,7 +56,6 @@
             <li class="banner2"><a><img style="width: 1020px; height: 455px ;" src="__STATIC__/myshop/images/ad22.jpg" /></a></li>
             <li class="banner3"><a><img height="455px" src="__STATIC__/myshop/images/timg.jpg" /></a></li>
             <li class="banner4"><a><img width="1010px" height="455px" src="__STATIC__/myshop/images/tim.jpg" /></a></li>
-
         </ul>
     </div>
     <div class="clear"></div>
@@ -118,12 +118,14 @@
                                                         <span  title="电脑" style="color: #f44cde; margin-left: 10px;">电脑：</span>
                                                         {volist name='bdd' id="brands"}
                                                         <a rel="nofollow" title="" target="_blank" href="#" rel="nofollow"><span  class ="red" >{$brands.brand_name}</span></a>
+
                                                         {/volist}
                                                     </div>
                                                     <div class="dl-sort" style="display: block">
                                                         <span  title="电脑" style="color: #f44cde; margin-left: 10px;">配件：</span>
                                                         {volist name='bdp' id="brandp"}
                                                         <a rel="nofollow" title="" target="_blank" href="#" rel="nofollow"><span  class ="red" >{$brandp.brand_name}</span></a>
+
                                                         {/volist}
                                                     </div>
                                                 </div>
