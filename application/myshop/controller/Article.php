@@ -17,13 +17,40 @@ class Article extends Controller
     public function index()
     {
         $iphone=Db::table('goods')
-            ->where(['cat_id'=>1,'is_show'=>1])
+            ->where(['cat_id'=>2,'is_show'=>1])
             ->limit(8)
             ->select();
         $brand=Db::table('brand')
-            ->where(['b_id'=>2,'is_show'=>1])
+            ->where(['is_show'=>1,'b_id'=>2])
+            ->limit(6)
             ->select();
-        return $this->fetch('index',['iphone'=>$iphone,'brand_name'=>$brand]);
+        $content=Db::table('article')->where(['is_show'=>1])->select();
+        foreach ($content as & $v) {
+            $v['tab_name'] = Db::table($v['table_name'])->where('id',1)->select();
+            $v['caputer']=Db::table($v['table_name'])->where('id',2)->select();
+        }
+        $brands=Db::table('brand')
+            ->where(['b_id'=>1,'is_show'=>1])
+            ->select();
+        $computer=Db::table('goods')
+            ->where(['cat_id'=>1,'is_show'=>1])
+            ->limit(8)
+            ->select();
+        $brandss=Db::table('brand')
+            ->where(['b_id'=>4,'is_show'=>1])
+            ->select();
+        $iphone_s=Db::table('goods')
+            ->where(['cat_id'=>4,'is_show'=>1])
+            ->limit(8)
+            ->select();
+        $brandsss=Db::table('brand')
+            ->where(['b_id'=>3,'is_show'=>1])
+            ->select();
+        $computer_s=Db::table('goods')
+            ->where(['cat_id'=>3,'is_show'=>1])
+            ->limit(8)
+            ->select();
+        return $this->fetch('index',['iphone'=>$iphone,'brand'=>$brand,'content' => $content,'bd'=>$brands,'cp'=>$computer,'bdb'=>$brandss,'ips'=>$iphone_s,'bdbd'=>$brandsss,'cps'=>$computer_s]);
     }
 
     /**
@@ -43,9 +70,9 @@ class Article extends Controller
 
 
 
-/*
- * $id:品牌id
- * */
+    /*
+     * $id:品牌id
+     * */
     public function saler($id)
     {
         $mobile=Db::table('brand')->where(['id'=>$id,'is_show'=>1])->find();
@@ -182,7 +209,7 @@ class Article extends Controller
             ->where(['w.b_id'=>4])
             ->paginate(2);
 
-        return $this->fetch('saler',['mobile'=>$mobile,'ips'=>$ips]);
+        return $this->fetch('saler',['mobile'=>$mobile,'ips'=>$ips,'parts'=>$parts]);
     }
 
     /**
@@ -191,7 +218,7 @@ class Article extends Controller
      * @param  int  $id
      * @return \think\Response
      */
-    public function login()
+    public function isLog()
     {
         if(Session::has('user_name')){
             $this->success('订单生成中',url('Order/index'));
