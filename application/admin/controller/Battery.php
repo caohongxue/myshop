@@ -12,7 +12,7 @@ use think\Session;
  *电池容量管理控制器
  * @package app\admin\controller
  */
-class Battery extends Controller
+class Battery extends Base
 {
     /**
      * 品牌添加,修改数据
@@ -74,6 +74,9 @@ class Battery extends Controller
         $limit = 3;
         $model = new BatteryModel();
         $result = $model->paginate($limit);//分页
+        foreach ($result as $value){
+            $value['is_show']=$value['is_show']==1?'展示':'不展示';
+        }
         return $this->fetch('index',['result'=>$result]);
 
     }

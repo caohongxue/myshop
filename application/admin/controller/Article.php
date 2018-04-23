@@ -55,6 +55,8 @@ class Article extends Controller
         $table=ArticleModel::get($id)->value('table_name');
         $c=ucfirst($table);
         $this->redirect($c.'/index');
+
     }
+
 
 }

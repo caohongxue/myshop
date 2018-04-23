@@ -77,9 +77,8 @@ class Login extends Controller
             if($user){
                 if ($user['password'] == md5(md5($data['password']))) {
                     Session::set('user_name', $user['user_name'], 'think');
-                    Session::set('user_id', $user['user_id'], 'think');
-                   /* $id = Session::get('user_name','think');
-                    dump($id);die;*/
+                    /* $id = Session::get('user_name','think');
+                     dump($id);die;*/
                     $info = [
                         'session_id' => session_id(),
                         'user_id' => $user['user_id'],
@@ -87,6 +86,7 @@ class Login extends Controller
                         'status' => 1
                     ];
                     Db::name('session')->insert($info);
+                    dump($info);
                     echo '登录成功';
                 } else {
                     echo '您输入的密码不正确,请重新输入!';
