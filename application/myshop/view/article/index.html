@@ -99,11 +99,11 @@
                                                 <div class="sort-side">
                                                     <dl class="dl-sort" >
                                                         <dt><span title="手机">手机</span></dt>
-                                                        {volist name='$val.tab_name' id="row"}<dd><a title="" href="{:url('Article/saler',['id'=>$val['id']])}"><span>{$row.name}</span></a></dd>{/volist}
+                                                        {volist name='$val.tab_name' id="row"}<dd><a title="" href="{:url('Article/table',['id'=>$row['tab_id'],'table'=>$val['table_name']])}"><span>{$row.name}</span></a></dd>{/volist}
                                                     </dl>
                                                     <dl class="dl-sort" style="clear: both;">
                                                         <dt><span title="电脑">电脑</span></dt>
-                                                        {volist name='$val.caputer' id="ca"}<dd><a title="" href="{:url('Article/saler',['id'=>$val['id']])}"><span>{$ca.name}</span></a></dd>{/volist}
+                                                        {volist name='$val.caputer' id="ca"}<dd><a title="" href="{:url('Article/table',['id'=>$ca['id'],'table'=>$val['table_name']])}"><span>{$ca.name}</span></a></dd>{/volist}
                                                     </dl>
                                                 </div>
                                                 <div class="brand-side">

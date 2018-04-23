@@ -15,7 +15,7 @@
 		<link href="__STATIC__/myshop/css/seastyle.css" rel="stylesheet" type="text/css" />
 
 		<script type="text/javascript" src="__STATIC__/myshop/basic/js/jquery-1.7.min.js"></script>
-		<script type="text/javascript" src="_STATIC__/myshop/js/script.js"></script>
+		<script type="text/javascript" src="__STATIC__/myshop/js/script.js"></script>
 	</head>
 
 	<body>
@@ -55,9 +55,9 @@
 
 				<div class="search-bar pr">
 					<a name="index_none_header_sysc" href="#"></a>
-					<form action="{:url('Article/search')}" method="post" >
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="{$content}" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit" >
+					<form>
+						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+						<input id="ai-topsearch" class="submit am-btn"  value="搜索" index="1" type="submit">
 					</form>
 				</div>
 			</div>
@@ -89,16 +89,13 @@
 	                  	<div class="theme-popover">														
 							<div class="searchAbout">
 								<span class="font-pale">相关搜索：</span>
-								<a title="坚果" href="#">{$content}</a>
 
 							</div>
 							<ul class="select">
 								<p class="title font-normal">
-									<span class="fl">{$content}</span>
-
-									<span class="total fl">搜索到<strong class="num">{$num[0]['count(*)']}</strong>件相关商品</span>
-
-
+									<span class="fl"></span>
+									<span class="total fl">搜索到<strong class="num"></strong>件相关商品</span>
+								</p>
 								<div class="clear"></div>
 								<li class="select-result">
 									<dl>
@@ -109,35 +106,12 @@
 								</li>
 								<div class="clear"></div>
 								<li class="select-list">
-									<dl id="select1">
-										<dt class="am-badge am-round">品牌</dt>	
-									
-										 <div class="dd-conent">										
-											<dd class="select-all selected"><a href="#">全部</a></dd>
-											 {volist name="brand" id="bran"}
-											 <dd><a href="#">{$bran.brand_name}</a></dd>
-											 {/volist}
-										 </div>
-									</dl>
-								</li>
-								<li class="select-list">
 									<dl id="select2">
 										<dt class="am-badge am-round">种类</dt>
 										<div class="dd-conent">
 											<dd class="select-all selected"><a href="#">全部</a></dd>
-											{volist name="cate" id="cate"}
-											<dd><a href="#">{$cate.goods_name}</a></dd>
-											{/volist}
-										</div>
-									</dl>
-								</li>
-								<li class="select-list">
-									<dl id="select3">
-										<dt class="am-badge am-round">选购热点</dt>
-										<div class="dd-conent">
-											<dd class="select-all selected"><a href="#">全部</a></dd>
-											{volist name="redn" id="redn"}
-											<dd><a href="#">{$redn.goods_name}</a></dd>
+											{volist name="table" id="sch"}
+											<dd><a href="#">{$sch.name}</a></dd>
 											{/volist}
 										</div>
 									</dl>
@@ -156,19 +130,7 @@
 								<div class="clear"></div>
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-									<li>
-										<div class="i-pic limit">
-											<img src="__STATIC__/myshop/images/imgsearch1.jpg" />
-											<p class="title fl">【良品铺子旗舰店】手剥松子218g 坚果炒货零食新货巴西松子包邮</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>56.90</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
+
 									<li>
 										<div class="i-pic limit">
 											
@@ -372,7 +334,7 @@
 								</li>
 
 							</div>
-							<div class="clear" ></div>
+							<div class="clear"></div>
 							<!--分页 -->
 							<ul class="am-pagination am-pagination-right">
 								<li class="am-disabled"><a href="#">&laquo;</a></li>
@@ -383,6 +345,7 @@
 								<li><a href="#">5</a></li>
 								<li><a href="#">&raquo;</a></li>
 							</ul>
+
 						</div>
 					</div>
 					<div class="footer">
@@ -403,7 +366,7 @@
 								<a href="#">合作伙伴</a>
 								<a href="#">联系我们</a>
 								<a href="#">网站地图</a>
-								<em>© 2015-2025 Hengwang.com 版权所有.更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
+								<em>© 2015-2025 Hengwang.com 版权所有. 更多模板 <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></em>
 							</p>
 						</div>
 					</div>
@@ -429,7 +392,7 @@
 						</a>
 						<div class="ibar_login_box status_login">
 							<div class="avatar_box">
-								<p class="avatar_imgbox"><img src="__STATIC__/myshop/images/no-img_mid_.jpg" /></p>
+								<p class="avatar_imgbox"><img src="../images/no-img_mid_.jpg" /></p>
 								<ul class="user_info">
 									<li>用户名：sl1903</li>
 									<li>级&nbsp;别：普通会员</li>
@@ -474,7 +437,7 @@
 
 					<div id="brand" class="item">
 						<a href="#">
-							<span class="wdsc"><img src="__STATIC__/myshop/images/wdsc.png" /></span>
+							<span class="wdsc"><img src="../images/wdsc.png" /></span>
 						</a>
 						<div class="mp_tooltip">
 							我的收藏
@@ -484,7 +447,7 @@
 
 					<div id="broadcast" class="item">
 						<a href="#">
-							<span class="chongzhi"><img src="__STATIC__/myshop/images/chongzhi.png" /></span>
+							<span class="chongzhi"><img src="../images/chongzhi.png" /></span>
 						</a>
 						<div class="mp_tooltip">
 							我要充值
@@ -500,7 +463,7 @@
 						<!--二维码 -->
 						<li class="qtitem">
 							<a href="#none"><span class="mpbtn_qrcode"></span></a>
-							<div class="mp_qrcode" style="display:none;"><img src="__STATIC__/myshop/images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
+							<div class="mp_qrcode" style="display:none;"><img src="../images/weixin_code_145.png" /><i class="icon_arrow_white"></i></div>
 						</li>
 						<li class="qtitem">
 							<a href="#top" class="return_top"><span class="top"></span></a>
@@ -581,7 +544,7 @@
 		<script>
 			window.jQuery || document.write('<script src="basic/js/jquery-1.9.min.js"><\/script>');
 		</script>
-		<script type="text/javascript" src="__STATIC__/myshop/basic/js/quick_links.js"></script>
+		<script type="text/javascript" src="../basic/js/quick_links.js"></script>
 
 <div class="theme-popover-mask"></div>
 

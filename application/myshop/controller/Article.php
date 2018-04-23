@@ -25,8 +25,8 @@ class Article extends Controller
             ->select();
         $content=Db::table('article')->where('is_show','1')->select();
         foreach ($content as & $v) {
-            $v['tab_name'] = Db::table($v['table_name'])->where('id',1)->select();
-            $v['caputer']=Db::table($v['table_name'])->where('id',2)->select();
+            $v['tab_name'] = Db::table($v['table_name'])->where('tab_id',1)->select();
+            $v['caputer']=Db::table($v['table_name'])->where('tab_id',2)->select();
         }
         $brands=Db::table('brand')->where('b_id',2)->select();
         $brandd=Db::table('brand')->where('b_id',1)->select();
@@ -46,8 +46,8 @@ class Article extends Controller
         $run=Db::name('processor')->find($data['runme_id']);
         $pro=Db::name('processor')->find($data['pro_id']);
         $mem=Db::name('running_memory')->find($data['memory_id']);
-
-        return $this->fetch('each',['data'=>$data,'brand'=>$brand,'pro'=>$pro,'run'=>$run,'mem'=>$mem]);
+        $you=Db::table('goods')->where('click_name','>',10)->limit(5)->select();
+        return $this->fetch('each',['data'=>$data,'brand'=>$brand,'pro'=>$pro,'run'=>$run,'mem'=>$mem,'you'=>$you]);
     }
 
     public function search()
@@ -59,7 +59,9 @@ class Article extends Controller
          $num=Db::table('goods')->query($number);
          $cat="select goods_name from `goods` where `goods_name` like '%".$content."'" ;
          $cate=Db::table('goods')->query($cat);
-         $redn=Db::table('goods')->where('goods_name',['like','$content%'],['like','%$content'])->where('click_name',['>',10],['<>',20])->find();
+         $redn=Db::table('goods')->where('goods_name',['like','$content%'],['like','%$content'])->where('click_name',['>',10],['<>',20],'or')->select();
+
+
          return $this->fetch('search',['content'=>$content,'brand'=>$brand,'num'=>$num,'cate'=>$cate,'redn'=>$redn]);
     }
 
@@ -69,9 +71,16 @@ class Article extends Controller
      * @param  \think\Request  $request
      * @return \think\Response
      */
-    public function save(Request $request)
+    public function table($id,$table)
     {
         //
+        $tabl=Db::table($table)->where('tab_id',$id)->select();
+//        $goo=Db::table('correlation')->find('id',$tabl['id'])['goods_id'];
+//        $goos=Db::table('goods')->where('goods_id',$goo)->select();
+//        var_dump($goo);
+//        die;
+        return $this->fetch('sch',['table'=>$tabl]);
+
     }
 
     /**
