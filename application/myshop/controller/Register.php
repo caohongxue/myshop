@@ -27,7 +27,7 @@ class Register extends Controller{
         } else {
             $data = Request::instance()->param();
             if ($data['email']) {
-                $data['password'] = md5(Request::instance()->param('password'));
+                $data['password'] = md5(md5(Request::instance()->param('password')));
                 if (Db::name('user')->insert($data)) {
                     echo 'ok';
                 } else {
@@ -40,7 +40,7 @@ class Register extends Controller{
     {
 
         $data = Request::instance()->param();
-        $data['password'] = md5(Request::instance()->param('password'));
+        $data['password'] = md5(md5(Request::instance()->param('password')));
         if ($this->model->save($data)) {
             echo 'ok';
         } else {
