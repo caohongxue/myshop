@@ -98,14 +98,13 @@
                                         <div class="area-bg">
                                             <div class="menu-srot">
                                                 <div class="sort-side">
-                                                    <dl class="dl-sort">
+                                                    <dl class="dl-sort" >
                                                         <dt><span title="手机">手机</span></dt>
-                                                        {volist name='$val.tab_name' id="row"}<dd><a title="" href="#"><span>{$row.name}</span></a></dd>{/volist}
+                                                        {volist name='$val.tab_name' id="row"}<dd><a title="" href="{:url('Article/table',['id'=>$row['tab_id'],'table'=>$val['table_name']])}"><span>{$row.name}</span></a></dd>{/volist}
                                                     </dl>
-
                                                     <dl class="dl-sort" style="clear: both;">
                                                         <dt><span title="电脑">电脑</span></dt>
-                                                        {volist name='$val.caputer' id="ca"}<dd><a title="" href="#"><span>{$ca.name}</span></a></dd>{/volist}
+                                                        {volist name='$val.caputer' id="ca"}<dd><a title="" href="{:url('Article/table',['id'=>$ca['id'],'table'=>$val['table_name']])}"><span>{$ca.name}</span></a></dd>{/volist}
                                                     </dl>
                                                 </div>
                                                 <div class="brand-side">
@@ -120,6 +119,14 @@
                                                         <span  title="电脑" style="color: #f44cde; margin-left: 10px;">电脑：</span>
                                                         {volist name='bdd' id="brands"}
                                                         <a rel="nofollow" title="" target="_blank" href="#" rel="nofollow"><span  class ="red" >{$brands.brand_name}</span></a>
+
+                                                        {/volist}
+                                                    </div>
+                                                    <div class="dl-sort" style="display: block">
+                                                        <span  title="电脑" style="color: #f44cde; margin-left: 10px;">配件：</span>
+                                                        {volist name='bdp' id="brandp"}
+                                                        <a rel="nofollow" title="" target="_blank" href="#" rel="nofollow"><span  class ="red" >{$brandp.brand_name}</span></a>
+
                                                         {/volist}
                                                     </div>
                                                 </div>
