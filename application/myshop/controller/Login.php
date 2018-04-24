@@ -13,6 +13,7 @@ class Login extends Controller
 {
 
 
+
     /**
      * 显示登录页面
      *
@@ -78,8 +79,8 @@ class Login extends Controller
                 if ($user['password'] == md5(md5($data['password']))) {
                     Session::set('user_name', $user['user_name'], 'think');
                     Session::set('user_id', $user['user_id'], 'think');
-                   /* $id = Session::get('user_name','think');
-                    dump($id);die;*/
+                    /* $id = Session::get('user_name','think');
+                     dump($id);die;*/
                     $info = [
                         'session_id' => session_id(),
                         'user_id' => $user['user_id'],
@@ -138,6 +139,7 @@ class Login extends Controller
             ]);
         }
     }
+
 
 
     /**
