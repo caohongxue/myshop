@@ -1,0 +1,119 @@
+{extend name='template/laythin' /}
+{block name='title'}<title>我是品牌手机专卖店</title>{/block}
+{block name="shopMain"}
+<script type="text/javascript" src="__STATIC__/myshop/js/script.js"></script>
+<link href="__STATIC__/myshop/css/seastyle.css" rel="stylesheet" type="text/css" />
+<link href="__STATIC__/myshop/css/hmstyle.css" rel="stylesheet" type="text/css"/>
+<link href="__STATIC__/myshop/css/hmstyle.css" rel="stylesheet" type="text/css"/>
+<link href="__STATIC__/myshop/css/page.css" rel="stylesheet" type="text/css"/>
+<div class="am-g am-g-fixed">
+    <div class="am-u-sm-12 am-u-md-12">
+        <div class="theme-popover">
+            <div class="searchAbout">
+                <span class="font-pale">相关搜索：</span>
+                <a title="坚果" href="#">坚果</a>
+                <a title="瓜子" href="#">瓜子</a>
+                <a title="鸡腿" href="#">豆干</a>
+
+            </div>
+            <ul class="select">
+                <p class="title font-normal">
+                    <span class="fl"><img style="width: 100px;margin: 10px 20px" src="{$mobile.brand_logo}" alt="品牌logo"></span>
+                    <span class="total fl" style="font-size: 22px;font-style: italic;">欢迎来到<strong class="num" style="font-weight: 800;font-size: 18px;color: orangered">{$mobile.brand_name}</strong>专卖店,祝您购物愉快哦！</span>
+                </p>
+                <div class="clear"></div>
+                <li class="select-result">
+                    <dl>
+                        <dt>已选</dt>
+                        <dd class="select-no"></dd>
+                        <p class="eliminateCriteria">清除</p>
+                    </dl>
+                </li>
+                <div class="clear"></div>
+                <li class="select-list">
+                    <dl id="select1">
+                        <dt class="am-badge am-round" style="color: orangered">品牌专卖</dt>
+
+                        <div class="dd-conent">
+                            <dd class="select-all"><a href="#">{$mobile.brand_name}</a></dd>
+                        </div>
+
+                    </dl>
+                </li>
+                <li class="select-list">
+                    <dl id="select2">
+                        <dt class="am-badge am-round" style="color: orangered">种类</dt>
+                        <div class="dd-conent">
+                            <dd class="select-all"><a href="#">{$mobile.b_id}</a></dd>
+                        </div>
+                    </dl>
+                </li>
+
+                <li class="select-list">
+                    <dl id="select2">
+                        <dt class="am-badge am-round" style="color: orangered">品牌描述</dt>
+                        <div class="dd-conent">
+                            <dd class="select-all"><a href="#">{$mobile.brand_des}</a></dd>
+                        </div>
+                    </dl>
+                </li>
+
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="search-content">
+            <div class="sort">
+                <li class="first"><a href="{:url('click',['id'=>$mobile['id']])}">综合排序</a></li>
+                <li><a href="{:url('sale',['id'=>$mobile['id']])}">销量排序</a></li>
+                <li><a href="{:url('price',['id'=>$mobile['id']])}">价格优先</a></li>
+                <li class="big"><a href="{:url('tell',['id'=>$mobile['id']])}">评价为主</a></li>
+            </div>
+            <div class="clear"></div>
+
+            <ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+                {volist name='ips' id='val'}
+                <li>
+                    <a href="{:url('Article/each',['id'=>$val['goods_id']])}">
+                    <div class="i-pic limit">
+                        <img src="{$val.goods_img}" />
+                        <p class="title fl">{$val.title_des}</p>
+                        <p class="price fl">
+                            <b>¥</b>
+                            <strong>{$val.shop_price}</strong>
+                        </p>
+                        <p class="number fl">
+                            销量<span>{$val.sale_number}</span>
+                        </p>
+                    </div>
+                    </a>
+                </li>
+                {/volist}
+            </ul>
+            {$ips->render()}
+        </div>
+
+        <div class="search-side">
+
+            <div class="side-title">
+                相关配件
+            </div>
+            {volist name='parts' id='val'}
+            <li>
+                <div class="i-pic check">
+                    <img src="{$val.goods_img}" />
+                    <p class="check-title">{$val.goods_name}</p>
+                    <p class="price fl">
+                        <b>¥</b>
+                        <strong>{$val.shop_price}</strong>
+                    </p>
+                    <p class="number fl">
+                        销量<span>{$val.sale_number}</span>
+                    </p>
+                </div>
+            </li>
+            {/volist}
+        </div>
+        {$parts->render()}
+    </div>
+</div>
+{/block}
