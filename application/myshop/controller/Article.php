@@ -230,7 +230,8 @@ class Article extends Controller
      */
     public function isLog()
     {
-        if(Session::has('user_name')){
+        $name=Session::get('user_name','think');
+        if($name){
             $this->success('订单生成中',url('Order/index'));
         }else{
             $this->success('未登录，请登录后购买！',url('Login/login'));

@@ -31,34 +31,36 @@
             </div>
             <div class="panel-body">
                 <div class="well">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="control-label" for="input-name">商品名称</label>
-                                <input type="text" name="filter_name" value="" placeholder="商品名称" id="input-name" class="form-control" />
+                    <form action="{:url('search')}" method="post">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-name">商品名称</label>
+                                    <input type="text" name="filter_name" value="" placeholder="商品名称" id="input-name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-price">销售价格</label>
+                                    <input type="text" name="filter_price" value="" placeholder="销售价格" id="input-price" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-status">状态</label>
+                                    <select name="filter_status" id="input-status" class="form-control">
+                                        <option value="*"></option>
+                                        <option value="1">启用</option>
+                                        <option value="0">停用</option>
+                                    </select>
+                                </div>
+                                <button type="submit" id="button-filter" class="btn btn-primary pull-right">
+                                    <i class="fa fa-search"></i>
+                                    筛选
+                                </button>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="control-label" for="input-price">销售价格</label>
-                                <input type="text" name="filter_price" value="" placeholder="销售价格" id="input-price" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label class="control-label" for="input-status">状态</label>
-                                <select name="filter_status" id="input-status" class="form-control">
-                                    <option value="*"></option>
-                                    <option value="1">启用</option>
-                                    <option value="0">停用</option>
-                                </select>
-                            </div>
-                            <button type="button" id="button-filter" class="btn btn-primary pull-right">
-                                <i class="fa fa-search"></i>
-                                筛选
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
                 <form action="{:url('multidel')}" method="post" enctype="multipart/form-data" id="form-product">
                     <div class="table-responsive">
@@ -94,15 +96,21 @@
                                         <input type="checkbox" name="selected[]" value="{$row.goods_id}" />
                                     </td>
                                     <td class="text-center">
-                                        <img src="../image/catalog/gd/product/yanjing4.jpg" alt="{$row.goods_name}" class="img-thumbnail" style="max-width: 40px"/>
+                                        <img src="__ROOT__/uploads/{$row.goods_img}" alt="{$row.goods_name}" class="img-thumbnail" style="max-width: 40px"/>
                                     </td>
                                     <td class="text-left">{$row.goods_name}</td>
                                     <td class="text-left">{$row.goods_model}</td>
+                                    {if condition="$row['promote_price']==0"}
+                                    <td class="text-right">
+                                        {$row.shop_price}
+                                    </td>
+                                    {else/}
                                     <td class="text-right">
                                         <span style="text-decoration: line-through;">{$row.shop_price}</span>
                                         <br/>
                                         <div class="text-danger">{$row.promote_price}</div>
                                     </td>
+                                    {/if}
                                     <td class="text-right">
                                         <span class="label label-success">{$row.stock}</span>
                                     </td>

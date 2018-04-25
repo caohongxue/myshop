@@ -117,6 +117,7 @@ class Login extends Controller
                 if($user->password == md5(md5(input('password')))){
                     $data = $user->getData();
                     Session::set('user_name',$data,'think');
+
                     $info = [
                         'session_id'=>session_id(),
                         'user_id'=>$data['user_id'],

@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use think\Controller;
+use think\Db;
 use think\Request;
 use app\admin\model\VideoCard as VideoCardModel;
 use think\Session;
@@ -29,7 +30,7 @@ class VideoCard extends Base
         else{
             $model = VideoCardModel::get($id);//修改数据-实例化模型
         }
-        
+        $cat=Db::table('category')->select();
         if($request->isGet()){
             // Session::set('data',$data);设置session的值
             $data = Session::has('data')?Session::get('data'):$model->getData();//获取修改的数据
@@ -37,6 +38,7 @@ class VideoCard extends Base
             return $this->fetch('save',[
                 'message'=>Session::get('message'),
                 'data'=>$data,//表单中读取要修改的数据
+                'tab'=>$cat
                 ]);//得到报错信息的值在模板中
         }
           
@@ -52,6 +54,7 @@ class VideoCard extends Base
                 $this->redirect('save',[],302,[
                     'message'=>$validate->getError(),//验证报错信息
                     'data'=>$data,
+                    'tab'=>$cat
                     ]);
             }
 
@@ -75,6 +78,7 @@ class VideoCard extends Base
         $model = new VideoCardModel();
         $result = $model->paginate($limit);//分页
         foreach ($result as $value){
+            $value['tab']=Db::table('category')->where('id',$value['tab_id'])->value('cat_name');
             $value['is_show']=$value['is_show']==1?'展示':'不展示';
         }
         return $this->fetch('index',['result'=>$result]);

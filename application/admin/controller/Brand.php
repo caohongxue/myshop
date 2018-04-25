@@ -73,6 +73,7 @@ class Brand extends Base{
      * @return mixed
      */
     public function save($id=null){//$id : 修改的数据
+//        dump($id);exit;
         $request=request();
         if(is_null($id)){
             $model=new BrandModel();//实例化-添加数据
@@ -115,7 +116,7 @@ class Brand extends Base{
      * @param  int  $id
      * @return mixed
      */
-    public function multidel()
+    public function mutildel()
     {
         BrandModel::destroy(input('selected/a',[]));//删除多条数据
         $this->redirect('index');

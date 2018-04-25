@@ -1,0 +1,136 @@
+{extend name='template/temptl' /}
+{block name='content'}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <a href="{:url('save')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i class="fa fa-plus"></i>
+                </a>
+                <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-product').submit() : false;">
+                    <i class="fa fa-trash-o"></i>
+                </button>
+            </div>
+            <h1>回收站管理</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">首页</a>
+                </li>
+                <li>
+                    <a href="{:url('index')}">商品管理</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-list"></i>
+                    商品列表
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div class="well">
+                    <form action="{:url('sear')}" method="post">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-name">商品名称</label>
+                                    <input type="text" name="filter_name" value="" placeholder="商品名称" id="input-name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-price">销售价格</label>
+                                    <input type="text" name="filter_price" value="" placeholder="销售价格" id="input-price" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-status">状态</label>
+                                    <select name="filter_status" id="input-status" class="form-control">
+                                        <option value="*"></option>
+                                        <option value="1">启用</option>
+                                        <option value="0">停用</option>
+                                    </select>
+                                </div>
+                                <button type="submit" id="button-filter" class="btn btn-primary pull-right">
+                                    <i class="fa fa-search"></i>
+                                    筛选
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <form action="{:url('delete')}" method="post" enctype="multipart/form-data" id="form-product">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <td style="width: 1px;" class="text-center">
+                                    <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                                </td>
+                                <td class="text-center">图片</td>
+                                <td class="text-left">
+                                    <a href="" class="asc">商品名称</a>
+                                </td>
+                                <td class="text-left">
+                                    <a href="">商品型号</a>
+                                </td>
+                                <td class="text-right">
+                                    <a href="" class="desc">价格</a>
+                                </td>
+                                <td class="text-right">
+                                    <a href="">数量SKU</a>
+                                </td>
+                                <td class="text-left">
+                                    <a href="">状态</a>
+                                </td>
+                                <td class="text-right">管理</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="list" id="row"}
+                            <tr>
+                                <td class="text-center">
+                                    <input type="checkbox" name="selected[]" value="{$row.goods_id}" />
+                                </td>
+                                <td class="text-center">
+                                    <img src="__ROOT__/uploads/{$row.goods_img}" alt="{$row.goods_name}" class="img-thumbnail" style="max-width: 40px"/>
+                                </td>
+                                <td class="text-left">{$row.goods_name}</td>
+                                <td class="text-left">{$row.goods_model}</td>
+                                {if condition="$row['promote_price']==0"}
+                                <td class="text-right">
+                                    {$row.shop_price}
+                                </td>
+                                {else/}
+                                <td class="text-right">
+                                    <span style="text-decoration: line-through;">{$row.shop_price}</span>
+                                    <br/>
+                                    <div class="text-danger">{$row.promote_price}</div>
+                                </td>
+                                {/if}
+                                <td class="text-right">
+                                    <span class="label label-success">{$row.stock}</span>
+                                </td>
+                                <td class="text-left">{$row.is_show}</td>
+                                <td class="text-right">
+                                    <a href="{:url('save')}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a href="{:url('manage')}" data-toggle="tooltip" title="管理选项" class="btn btn-primary">
+                                        <i class="fa">O</i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
