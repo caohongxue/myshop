@@ -7,6 +7,8 @@ use think\Db;
 use think\Request;
 use app\admin\model\AdminUser as AdminUserModel;
 use think\Session;
+use app\admin\model\AuthGroupAdmin as AuthGroupAdminModel;
+
 
 class AdminUser extends Base
 {
@@ -80,12 +82,51 @@ class AdminUser extends Base
         $this->redirect('index');
     }
     /**
+
+     * 重新受理权限
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function manage($id){
+        $user = AdminUserModel::get($id);//获取当前组
+        $auth_group = Db::table('auth_group_admin')->where(['admin_id' => $id])->value('group_id');
+//        dump($auth_group);exit;
+        if (request()->isGet()) {
+            $group = Db::table('auth_group')->select();//获取所有权限
+            return $this->fetch('manage', [
+                'user' => $user->getData(),
+                'group' => $group,
+                'auth_group' => $auth_group
+            ]);
+        } elseif (request()->isPost()) {
+            if($auth_group!=input('group')){
+                Db::table('auth_group_admin')->where(['group_id' => $auth_group,'admin_id'=>$id])->delete();
+                $authGroupRule = new AuthGroupAdminModel();//实例化权限用户关联表
+                $row=[
+                    'admin_id'=>$id,
+                    'group_id'=>input('group')
+                ];
+                $authGroupRule->save($row);
+            }
+            $this->redirect('index');
+        }
+    }
+    /**
+
      * 查看权限
      *
      * @param  int  $id
      * @return mixed
      */
+
+    public function check($id){
+
+    }
+
+
     public function manage(){
         echo '等我一会';
     }
+
 }

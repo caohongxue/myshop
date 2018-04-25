@@ -23,7 +23,7 @@ class Base extends Controller{
             $this->redirect('Login/login');
         }
 //        echo 'pathinfo: ' . $this->request->path() . '<br/>';
-//        if('pathinfo: ' . $this->request->path()!='admin/home/add'){
+//        if( $this->request->path()!='admin/home/add'){
 //            $this->error('me');
 //        }
         $this->assign('super_admin','aa');

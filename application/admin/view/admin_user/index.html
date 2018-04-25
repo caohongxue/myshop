@@ -45,7 +45,7 @@
                                 <td class="text-left">
                                     <a href="">上次登录时间</a>
                                 </td>
-                                <td class="text-right">管理</td>
+                                <td class="text-center">管理</td>
                             </tr>
                             </thead>
                             <tbody>
@@ -57,11 +57,15 @@
                                 <td class="text-left">{$row.user_name}</td>
                                 <td class="text-left">{$row.email}</td>
                                 <td class="text-left">{$row.last_login|date='Y-m-d H:i:s',###}</td>
-                                <td class="text-right">
-                                    <a href="{:url('save',['id'=>$row['user_id']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
+
+                                <td class="text-center">
+                                    <a href="{:url('showAuth')}" data-toggle="tooltip" title="" class="btn btn-primary">
+                                        <i class="fa fa-key"></i>
+                                    </a>
+                                    <a href="{:url('check',['id'=>$row['user_id']])}" data-toggle="tooltip" title="查看权限" class="btn btn-primary">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{:url('manage')}" data-toggle="tooltip" title="查看授权" class="btn btn-primary">
+                                    <a href="{:url('manage',['id'=>$row['user_id']])}" data-toggle="tooltip" title="重新授权" class="btn btn-primary">
                                         <i class="fa">O</i>
                                     </a>
                                 </td>

@@ -4,10 +4,10 @@ namespace app\admin\controller;
 
 use think\Controller;
 use think\Request;
-use app\admin\model\Category as CategoryModel;
+use app\admin\model\AuthRule as AuthRuleModel;
 use think\Session;
 
-class Category extends Base
+    class AuthRule extends Base
 {
     /**
      * 显示资源列表
@@ -16,29 +16,33 @@ class Category extends Base
      */
     public function index()
     {
-        $model=new CategoryModel();
-        $list=$model->paginate('10');
-        foreach ($list as $value){
-            if($value['sort']==0){
-                $value['status']='禁用';
-            }elseif ($value['sort']==1){
-                $value['status']='启用';
-            }
-        }
+        $model=new AuthRuleModel();
+        $list=$model->order('sort','asc')->paginate(10);
         return $this->fetch('index',['list'=>$list]);
     }
 
     /**
-     * 显示资源列表
+     * 按排序显示资源列表
+     *
+     * @return \think\Response
+     */
+    public function desc(){
+        $model=new AuthRuleModel();
+        $list=$model->order('sort','desc')->paginate('10');
+        return $this->fetch('index',['list'=>$list,'desc'=>'1']);
+    }
+
+    /**
+     * 修改保存
      *$id:修改条件
      * @return mixed
      */
     public function save($id=null){//$id : 修改的数据
         $request=request();
         if(is_null($id)){
-            $model=new CategoryModel();//实例化-添加数据
+            $model=new AuthRuleModel();//实例化-添加数据
         }else{
-            $model=CategoryModel::get($id);//实例化-修改数据
+            $model=AuthRuleModel::get($id);//实例化-修改数据
         }
 
         if($request->isGet()){
@@ -50,7 +54,7 @@ class Category extends Base
             ]);//得到报错信息的值到模板中
         }elseif ($request->isPost()){
             $data=$request->post();//收集表单数据
-            $validate=validate('Category');
+            $validate=validate('AuthGroup');
             $ch=$validate->batch()->check($data);
             if(!$ch){
                 $this->redirect('save',[],302,[
@@ -62,33 +66,5 @@ class Category extends Base
             $model->save();//保存数据
             $this->redirect('index');//跳转页面
         }
-    }
-    /**
-     * 倒序显示资源列表
-     *$id:修改条件
-     * @return mixed
-     */
-    public function desc(){
-        $model=new CategoryModel();
-        $list=$model->order('cat_name')->paginate('10');
-        foreach ($list as $value){
-            if($value['sort']==0){
-                $value['status']='禁用';
-            }elseif ($value['sort']==1){
-                $value['status']='启用';
-            }
-        }
-        return $this->fetch('index',['list'=>$list,'desc'=>'1']);
-    }
-    /**
-     * 删除指定资源
-     *
-     * @param  int  $id
-     * @return mixed
-     */
-    public function multidel()
-    {
-        CategoryModel::destroy(input('id/a',[]));//删除多条数据
-        $this->redirect('index');
     }
 }
