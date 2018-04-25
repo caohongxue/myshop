@@ -26,6 +26,7 @@ class Base extends Controller{
 //        if('pathinfo: ' . $this->request->path()!='admin/home/add'){
 //            $this->error('me');
 //        }
+        $this->assign('super_admin','aa');
         $user=Db::table('admin_user')->find($userInfo['user_id']);
         Session::set('user',$user);
     }

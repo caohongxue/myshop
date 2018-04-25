@@ -33,7 +33,7 @@
         </ul>
         <ul class="message-r">
             <div class="topMessage home">
-                <div class="mebnnu-hd"><a href="#" target="_top" class="h">商城首页</a></div>
+                <div class="mebnnu-hd"><a href="{:url('Article/index')}" target="_top" class="h">商城首页</a></div>
             </div>
             <div class="topMessage my-shangcheng">
                 <div class="menu-hd MyShangcheng"><a href="{:url('Person/index')}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
@@ -57,9 +57,9 @@
 
         <div class="search-bar pr">
             <a name="index_none_header_sysc" href="#"></a>
-            <form>
+            <form action="{:url('Article/search')}" method="post" >
                 <input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-                <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+                <input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit" >
             </form>
         </div>
     </div>
@@ -71,10 +71,10 @@
     <!--轮播 -->
     <div class="am-slider am-slider-default scoll" data-am-flexslider id="demo-slider-0">
         <ul class="am-slides">
-            <li class="banner1"><a href="introduction.html"><img src="__STATIC__/myshop/images/ad1.jpg" /></a></li>
-            <li class="banner2"><a><img src="__STATIC__/myshop/images/ad2.jpg" /></a></li>
-            <li class="banner3"><a><img src="__STATIC__/myshop/images/ad3.jpg" /></a></li>
-            <li class="banner4"><a><img src="__STATIC__/myshop/images/ad4.jpg" /></a></li>
+            <li class="banner1"><a href="introduction.html"><img style="width: 1020px; height: 455px ;" src="__STATIC__/myshop/images/ad11.jpg" /></a></li>
+            <li class="banner2"><a><img style="width: 1020px; height: 455px ;" src="__STATIC__/myshop/images/ad22.jpg" /></a></li>
+            <li class="banner3"><a><img src="__STATIC__/myshop/images/tim.jpg" /></a></li>
+            <li class="banner4"><a><img src="__STATIC__/myshop/images/timg.jpg" /></a></li>
 
         </ul>
     </div>
@@ -784,7 +784,7 @@
 
         <div class="am-g am-g-fixed recommendation">
             <div class="clock am-u-sm-3">
-            <img src="__STATIC__/myshop/images/2016.png "></img>
+            <img src="__STATIC__/myshop/images/te.jpg "></img>
             <p>今日<br>推荐</p>
         </div>
         <div class="am-u-sm-4 am-u-lg-3 ">
