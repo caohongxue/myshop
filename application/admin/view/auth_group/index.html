@@ -1,0 +1,81 @@
+{extend name='template/temptl' /}
+{block name='content'}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <a href="{:url('save')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i class="fa fa-plus"></i>
+                </a>
+                <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-product').submit() : false;">
+                    <i class="fa fa-trash-o"></i>
+                </button>
+            </div>
+            <h1>品牌管理</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">首页</a>
+                </li>
+                <li>
+                    <a href="">品牌管理</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-list"></i>
+                    商品列表
+                </h3>
+            </div>
+            <div class="panel-body">
+                <form action="{:url('save')}" method="post" enctype="multipart/form-data" id="form-product">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <td style="width: 1px;" class="text-center">
+                                    <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                                </td>
+                                <td class="text-center">分组管理</td>
+                                <td class="text-center">
+                                    {if condition="isset($desc)"}<a href="{:url('index')}" class="desc">排序</a>{else/}<a href="{:url('desc')}" class="asc">排序</a>{/if}
+                                </td>
+                                <td class="text-center">是否为超级管理</td>
+                                <td class="text-center">管理</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="list" id="row"}
+                            <tr>
+                                <td class="text-center">
+                                    <input type="checkbox" name="selected[]" value="{$row.id}" />
+                                </td>
+                                <td class="text-center">{$row.title}</td>
+                                <td class="text-center">{$row.sort}</td>
+                                <td class="text-center">{$row.is_super_man}</td>
+                                <td class="text-center">
+                                    <a href="{:url('save',['id'=>$row['id']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    {if condition="$row['is_super']==0"}
+                                    <a href="{:url('manage',['id'=>$row['id']])}" data-toggle="tooltip" title="查看授权" class="btn btn-primary">
+                                        <i class="fa">O</i>
+                                    </a>
+                                    {/if}
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-sm-6 text-right">{$list->render()}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

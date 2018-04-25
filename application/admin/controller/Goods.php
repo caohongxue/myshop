@@ -11,7 +11,7 @@ use app\admin\model\Goods as GoodsModel;
 use app\admin\model\Correlation as CorrelationModel;
 use think\Session;
 
-class Goods extends Controller
+class Goods extends Base
 {
     /**
      * 显示资源列表
@@ -49,12 +49,15 @@ class Goods extends Controller
                 $image = Image::open(ROOT_PATH . 'public' . DS .'uploads'.DS.$img);
 
                 // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.png
-                $path=ROOT_PATH . 'public' . DS .'thumb'.DS.$img;
+                $path=ROOT_PATH . 'public' . DS .'thumb'.DS.'small'.DS.$img;
+                $path2=ROOT_PATH . 'public' . DS .'thumb'.DS.'big'.DS.$img;
                 $directory=substr($img,0,8);
-                if(!file_exists(ROOT_PATH . 'public' . DS .'thumb'.DS.$directory)){
-                    mkdir(ROOT_PATH .'public'.DS.'thumb'.DS.$directory);
+                if(!file_exists(ROOT_PATH . 'public' . DS .'thumb'.DS.'small'.DS.$directory)){
+                    mkdir(ROOT_PATH .'public'.DS.'thumb'.DS.'small'.DS.$directory);
+                    mkdir(ROOT_PATH .'public'.DS.'thumb'.DS.'big'.DS.$directory);
                 }
-                $image->thumb(50, 50)->save($path);
+                $image->thumb(400, 400)->save($path);
+                $image->thumb(450, 450)->save($path2);
                 return $img;
             }else{
                 $this->redirect('save',[],302,[
@@ -160,7 +163,7 @@ class Goods extends Controller
     }
 
     /**
-     * 删除指定资源
+     * 商品加入回收站
      *
      * @param  int  $id
      * @return mixed
@@ -174,4 +177,80 @@ class Goods extends Controller
         }
         $this->redirect('index');
     }
+    /**
+     * goods回收站资源
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function recycle(){
+        $model=new GoodsModel();
+        $list=$model->where('is_delete',1)->select();
+        foreach ($list as $value){
+            if($value['is_show']==1){
+                $value['is_show']='上架';
+            }else{
+                $value['is_show']='下架';
+            }
+        }
+        return $this->fetch('recycle',['list'=>$list]);
+    }
+    /**
+     * 回收站删除指定资源
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function delete(){
+        GoodsModel::destroy(input('selected/a',[]));//删除多条数据
+        $goods_id=input('selected/a',[]);
+        foreach ($goods_id as $value){
+//            $img=Db::table('goods')->where('goods_id',$value)->value('goods_img');
+//            unlink(ROOT_PATH . 'public' . DS .'thumb'.DS.'big'.DS.$img);
+//            unlink(ROOT_PATH . 'public' . DS .'thumb'.DS.'small'.DS.$img);
+//            unlink(ROOT_PATH . 'public' . DS .'uploads'.$img);
+            Db::table('correlation')->where('goods_id',$value)->delete();
+        }
+        $this->redirect('recycle');
+    }
+    /**
+     * 商品查找
+     *
+     * @param  int  $id
+     * @return mixed
+     */
+    public function search(){
+        $model=new GoodsModel();
+        $list=$model->whereOr('goods_name','like','%'.input('filter_name').'%')
+              ->whereOr('shop_price','>',input('filter_price'))
+              ->whereOr('is_show','like','%'.input('filter_status').'%')
+              ->where('is_delete',0)
+              ->select();
+        foreach ($list as $value){
+            if($value['is_show']==1){
+                $value['is_show']='上架';
+            }else{
+                $value['is_show']='下架';
+            }
+        }
+        return $this->fetch('index',['list'=>$list]);
+    }
+
+    public function sear(){
+        $model=new GoodsModel();
+        $list=$model->whereOr('goods_name','like','%'.input('filter_name').'%')
+            ->whereOr('shop_price','>',input('filter_price'))
+            ->whereOr('is_show','like','%'.input('filter_status').'%')
+            ->where('is_delete',1)
+            ->select();
+        foreach ($list as $value){
+            if($value['is_show']==1){
+                $value['is_show']='上架';
+            }else{
+                $value['is_show']='下架';
+            }
+        }
+        return $this->fetch('recycle',['list'=>$list]);
+    }
+
 }

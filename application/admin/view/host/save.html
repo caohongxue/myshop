@@ -29,23 +29,36 @@
                         {/if}
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab-general">
-<div class="form-group required">
-    <label class="col-sm-2 control-label" for="input-name">热销</label>
-    <div class="col-sm-10">
-        <input type="text" name="name" value="{$data['name']|default=''}" placeholder="热销" id="input-name" class="form-control" />
-        {if condition="isset($message['name'])"}
-            <label for="input-name" class="text-danger"> {$message['name']}</label>
-        {/if}
-    </div>
-</div><div class="form-group required">
-    <label class="col-sm-2 control-label" for="input-is_show">是否展示1展示2不展示</label>
-    <div class="col-sm-10">
-        <input type="text" name="is_show" value="{$data['is_show']|default=''}" placeholder="是否展示1展示2不展示" id="input-is_show" class="form-control" />
-        {if condition="isset($message['is_show'])"}
-            <label for="input-is_show" class="text-danger"> {$message['is_show']}</label>
-        {/if}
-    </div>
-</div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-name">热销</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="name" value="{$data['name']|default=''}" placeholder="热销" id="input-name" class="form-control" />
+                                        {if condition="isset($message['name'])"}
+                                            <label for="input-name" class="text-danger"> {$message['name']}</label>
+                                        {/if}
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="col-sm-2 control-label" for="input-is_show">是否展示</label>
+                                    <div class="col-sm-10">
+                                        <select name="is_show" id="input-is_show">
+                                            <option value="1">展示</option>
+                                            <option value="2" {if condition="isset($data['is_show'])"}{if condition="$data['is_show']==2"}selected{/if}{/if}>不展示</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input-type-id" class="col-sm-2 control-label">
+                                        <span title="" data-toggle="tooltip">商品分类</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" id="input-type-id" name="tab_id">
+                                            {volist name='tab' id='row'}
+                                            <option value="{$row.id}" {if condition="isset($data['tab_id'])"}{if condition="$data['tab_id']==$row['id']"}selected{/if}{/if}>{$row.cat_name}</option>
+                                            {/volist}
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>

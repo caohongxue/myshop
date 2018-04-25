@@ -1,0 +1,84 @@
+{extend name='template/temptl' /}
+{block name='content'}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <a href="{:url('save')}" data-toggle="tooltip" title="新增" class="btn btn-primary"> <i class="fa fa-plus"></i>
+                </a>
+                <button type="button" data-toggle="tooltip" title="删除" class="btn btn-danger" onclick="confirm('确认？') ? $('#form-product').submit() : false;">
+                    <i class="fa fa-trash-o"></i>
+                </button>
+            </div>
+            <h1>品牌管理</h1>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="">首页</a>
+                </li>
+                <li>
+                    <a href="">品牌管理</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    <i class="fa fa-list"></i>
+                    商品列表
+                </h3>
+            </div>
+            <div class="panel-body">
+                <form action="{:url('save')}" method="post" enctype="multipart/form-data" id="form-product">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <td style="width: 1px;" class="text-center">
+                                    <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                                </td>
+                                <td class="text-center">管理员名称</td>
+                                <td class="text-left">
+                                    <a href="">管理员邮箱</a>
+                                </td>
+                                <td class="text-left">
+                                    <a href="">上次登录时间</a>
+                                </td>
+                                <td class="text-center">管理</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="list" id="row"}
+                            <tr>
+                                <td class="text-center">
+                                    <input type="checkbox" name="selected[]" value="{$row.user_id}" />
+                                </td>
+                                <td class="text-left">{$row.user_name}</td>
+                                <td class="text-left">{$row.email}</td>
+                                <td class="text-left">{$row.last_login|date='Y-m-d H:i:s',###}</td>
+                                <td class="text-center">
+                                    <a href="{:url('showAuth')}" data-toggle="tooltip" title="" class="btn btn-primary">
+                                        <i class="fa fa-key"></i>
+                                    </a>
+                                    <a href="{:url('check',['id'=>$row['user_id']])}" data-toggle="tooltip" title="查看权限" class="btn btn-primary">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a href="{:url('manage',['id'=>$row['user_id']])}" data-toggle="tooltip" title="重新授权" class="btn btn-primary">
+                                        <i class="fa">O</i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+                <div class="row">
+                    <div class="col-sm-6 text-right">{$list->render()}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

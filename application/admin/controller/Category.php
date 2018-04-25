@@ -63,6 +63,11 @@ class Category extends Base
             $this->redirect('index');//跳转页面
         }
     }
+    /**
+     * 倒序显示资源列表
+     *$id:修改条件
+     * @return mixed
+     */
     public function desc(){
         $model=new CategoryModel();
         $list=$model->order('cat_name')->paginate('10');
