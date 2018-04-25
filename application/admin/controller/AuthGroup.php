@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 
+
 use app\admin\model\AuthGroupRule;
 use think\Controller;
 use think\Db;
@@ -9,6 +10,11 @@ use think\Request;
 use app\admin\model\AuthGroup as AuthGroupModel;
 use app\admin\model\AuthGroupRule as AuthGroupRuleModel;
 use think\Session;
+
+use think\Controller;
+use think\Request;
+use app\admin\model\AuthGroup as AuthGroupModel;
+
 
 class AuthGroup extends Base
 {
@@ -40,6 +46,7 @@ class AuthGroup extends Base
         $list=$model->order('sort','desc')->paginate('10');
         foreach ($list as $value){
             if($value['is_super']==0){
+
                 $value['is_super_man']='普通管理员';
             }elseif ($value['is_super']==1){
                 $value['is_super_man']='super-man';
@@ -49,6 +56,7 @@ class AuthGroup extends Base
         }
         return $this->fetch('index',['list'=>$list,'desc'=>'1']);
     }
+
 
     /**
      * 修改保存
@@ -131,4 +139,5 @@ class AuthGroup extends Base
             $this->redirect('index');
         }
     }
+
 }

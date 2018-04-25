@@ -25,6 +25,7 @@ class Goods extends Validate{
         'title_des' =>'require',
         'is_show' =>'require',
         'sort_order' =>'require|number|between:0,120',
+
         'goods_img'=>'require'
     ];
     //验证字段中文名

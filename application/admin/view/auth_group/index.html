@@ -54,16 +54,23 @@
                                 </td>
                                 <td class="text-center">{$row.title}</td>
                                 <td class="text-center">{$row.sort}</td>
+
                                 <td class="text-center">{$row.is_super_man}</td>
                                 <td class="text-center">
                                     <a href="{:url('save',['id'=>$row['id']])}" data-toggle="tooltip" title="编辑" class="btn btn-primary">
                                         <i class="fa fa-pencil"></i>
                                     </a>
+
                                     {if condition="$row['is_super']==0"}
                                     <a href="{:url('manage',['id'=>$row['id']])}" data-toggle="tooltip" title="查看授权" class="btn btn-primary">
                                         <i class="fa">O</i>
                                     </a>
                                     {/if}
+
+                                    <a href="{:url('manage')}" data-toggle="tooltip" title="查看授权" class="btn btn-primary">
+                                        <i class="fa">O</i>
+                                    </a>
+
                                 </td>
                             </tr>
                             {/volist}

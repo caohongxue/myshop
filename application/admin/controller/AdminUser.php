@@ -9,6 +9,7 @@ use app\admin\model\AdminUser as AdminUserModel;
 use think\Session;
 use app\admin\model\AuthGroupAdmin as AuthGroupAdminModel;
 
+
 class AdminUser extends Base
 {
     /**
@@ -81,6 +82,7 @@ class AdminUser extends Base
         $this->redirect('index');
     }
     /**
+
      * 重新受理权限
      *
      * @param  int  $id
@@ -111,13 +113,20 @@ class AdminUser extends Base
         }
     }
     /**
+
      * 查看权限
      *
      * @param  int  $id
      * @return mixed
      */
+
     public function check($id){
 
+    }
+
+
+    public function manage(){
+        echo '等我一会';
     }
 
 }
